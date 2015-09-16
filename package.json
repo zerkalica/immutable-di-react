@@ -14,7 +14,7 @@
     "release-patch": "npm run pull && npm version patch && npm run push",
     "release-minor": "npm run pull && npm version minor && npm run push",
     "release-major": "npm run pull && npm version major && npm run push",
-    "clean": "rm -rf cursors react utils __tests__ *.js *.map build",
+    "clean": "rm -rf __tests__ *.js *.map build",
     "build": "npm run clean && babel src --source-maps --out-dir .",
     "deploy": "npm run clean && babel src --source-maps --watch",
     "prod": "npm run build -- --production",
@@ -56,7 +56,7 @@
   ],
   "dependencies": {
     "babel-runtime": "^5.8.24",
-    "debug": "^2.2.0",
+    "immutable-di": "^1.3.26",
     "react": "^0.13.3"
   },
   "devDependencies": {
