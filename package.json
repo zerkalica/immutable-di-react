@@ -1,0 +1,77 @@
+{
+  "name": "immutable-di-react",
+  "version": "1.0.1",
+  "description": "React bindings for immutable-di: simple, promise-based dependency injection container with some state handling functions",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "scripts": {
+    "prepublish": "npm run lint && npm run test && npm run build",
+    "pre-commit": "npm run lint",
+    "update": "ncu -ua && npm install",
+    "pull": "git checkout master && git pull origin master",
+    "push": "git push origin master --tags && npm publish",
+    "release-patch": "npm run pull && npm version patch && npm run push",
+    "release-minor": "npm run pull && npm version minor && npm run push",
+    "release-major": "npm run pull && npm version major && npm run push",
+    "clean": "rm -rf cursors react utils __tests__ *.js *.map build",
+    "build": "npm run clean && babel src --source-maps --out-dir .",
+    "deploy": "npm run clean && babel src --source-maps --watch",
+    "prod": "npm run build -- --production",
+    "dev": "npm run build -- --watch",
+    "lint": "exit 0 && eslint src",
+    "test": "mocha",
+    "test.dev": "npm run test -- --growl --watch",
+    "test.cov": "babel-istanbul cover --report text --report html node_modules/mocha/bin/_mocha"
+  },
+  "author": "Stefan Zerkalica <zerkalica@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/zerkalica/immutable-di-react.git"
+  },
+  "keywords": [
+    "immutable-di",
+    "dependency injection",
+    "di",
+    "modular",
+    "state",
+    "functional",
+    "immutable",
+    "hot",
+    "live",
+    "replay",
+    "flux",
+    "elm"
+  ],
+  "files": [
+    "*.map",
+    "*.js",
+    "README.md",
+    "LICENSE",
+    "cursors",
+    "define",
+    "react",
+    "utils"
+  ],
+  "dependencies": {
+    "babel-runtime": "^5.8.24",
+    "debug": "^2.2.0",
+    "react": "^0.13.3"
+  },
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "babel-core": "^5.8.24",
+    "babel-eslint": "^4.1.2",
+    "babel-plugin-espower": "^1.0.0",
+    "eslint": "^1.4.3",
+    "eslint-config-airbnb": "0.0.8",
+    "eslint-config-airplus": "^1.0.4",
+    "eslint-plugin-react": "^3.3.2",
+    "glob": "^5.0.14",
+    "mocha": "^2.3.2",
+    "power-assert": "^1.0.1",
+    "proxyquire": "^1.7.2",
+    "sinon": "^1.16.1"
+  }
+}
