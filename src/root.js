@@ -34,7 +34,7 @@ export default function root(getDefaultState) {
 
     return function rootWrapper(BaseComponent) {
         const dn = BaseComponent.displayName || getFunctionName(BaseComponent)
-        return class RootComponentWrapper extends RootComponent {
+        class RootComponentWrapper extends RootComponent {
             static displayName = dn + '_root'
             static _getState = getState
 
@@ -42,5 +42,9 @@ export default function root(getDefaultState) {
                 return createElement(BaseComponent, this.props)
             }
         }
+
+        RootComponentWrapper.childContextTypes = RootComponent.childContextTypes
+
+        return RootComponentWrapper
     }
 }
