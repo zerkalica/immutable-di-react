@@ -34,16 +34,31 @@ export default function root(getDefaultState) {
 
     return function rootWrapper(BaseComponent) {
         const dn = BaseComponent.displayName || getFunctionName(BaseComponent)
-        class RootComponentWrapper extends RootComponent {
+        class RootComponentWrapper extends Component {
             static displayName = dn + '_root'
             static _getState = getState
+
+            static childContextTypes = {
+                container: p.instanceOf(Container).isRequired
+            }
+
+            getChildContext() {
+                return {
+                    container: this.__container
+                }
+            }
+
+            constructor(props, context) {
+                super(props, context)
+                this.__container = props.container
+                    ? props.container
+                    : new Container(new NativeCursor(this.constructor._getState(props)))
+            }
 
             render() {
                 return createElement(BaseComponent, this.props)
             }
         }
-
-        RootComponentWrapper.childContextTypes = RootComponent.childContextTypes
 
         return RootComponentWrapper
     }
